@@ -12,11 +12,13 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import { useNavigate } from "react-router-dom"; // For navigation
 
 export default function SurveyStartPage() {
   const [isHovered, setIsHovered] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [isConfettiVisible, setIsConfettiVisible] = useState(false);
+  const navigate = useNavigate(); // Initialize navigation hook
 
   const socialLinks = [
     {
@@ -50,6 +52,10 @@ export default function SurveyStartPage() {
     }, 500);
   }, []);
 
+  const handleDashboardRedirect = () => {
+    navigate("/dashboard"); // Navigate to the dashboard route
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-tr from-blue-100 via-white to-purple-100 flex flex-col items-center justify-center p-2 sm:p-8 relative overflow-hidden">
       {isConfettiVisible && (
@@ -80,7 +86,7 @@ export default function SurveyStartPage() {
                 ? "scale-110 rotate-15 shadow-lg shadow-md"
                 : "scale-100"
             } rounded-xl `}
-            style={{ backgroundColor: "transparent" }} // Ensure logo background is transparent
+            style={{ backgroundColor: "transparent" }}
           />
         </div>
 
@@ -89,11 +95,10 @@ export default function SurveyStartPage() {
             Thank you for submitting your application! We will review it and get
             back to you shortly.
             <br />
-            <br className="text-sm leading-tight text-gray-900"/> For more information, please feel free to explore the
-            following links:
+            <br className="text-sm leading-tight text-gray-900" /> For more
+            information, please feel free to explore the following links:
           </h2>
 
-          {/* Centering the icons across all screen sizes */}
           <div className="flex justify-center gap-6">
             {socialLinks.map(({ Icon, href, label }) => (
               <a
@@ -107,6 +112,16 @@ export default function SurveyStartPage() {
                 <Icon className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-6 lg:w-5" />
               </a>
             ))}
+          </div>
+
+          {/* Button to Navigate Back to Dashboard */}
+          <div className="mt-8 flex justify-center">
+            <button
+              onClick={handleDashboardRedirect}
+              className="flex justify-end w-full px-4 rounded-ss-lg text-black"
+            >
+              <span className="material-icons">arrow_forward_ios</span>
+            </button>
           </div>
         </div>
       </div>
